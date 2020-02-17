@@ -8,8 +8,10 @@
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>
+#include <cctype>
 #include "sudokuGrid.hpp"
 #include "sudokuSolver.hpp"
+
 
 using std::cout, std::cin, std::endl;
 
@@ -30,13 +32,17 @@ std::ostream & operator<<(std::ostream & out, Grid & grid)
     return out;
 }
 
-int main(int argc, char* argv[]) // Give y as a command line argument if you want to
+int main(int argc, char* argv[])
 {
     
-    int size = 9;
+    const int size = 9;
     Grid grid(size);
+    
+    char ans;
+    cout << "Give non-empty Sudoku grid cells on command line? (y/n)" << endl;
+    cin >> ans;
 
-    if( (argc > 1) && (*argv[1] == 'y'))
+    if( std::tolower(ans) == 'y' )
     {
         grid.fillEmptyWithZeros();
         cout << "Give info on non-empty grid cells.\n";
@@ -87,7 +93,7 @@ int main(int argc, char* argv[]) // Give y as a command line argument if you wan
         cout << "No solution found." << endl;
     }
     
-    cout << "The solution required " << solver.getCycles() << " cycles." << endl;
+    cout << "The solution required " << solver.getCycles() << " backtracking cycles." << endl;
     
     return 0;
 }
