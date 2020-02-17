@@ -13,11 +13,15 @@
 class Solver
 {
 public:
+    // Constructor
     explicit Solver(Grid & gridToBeSolved) :
     grid(gridToBeSolved),
     cycles(0)
     {
     }
+    
+    // Destructor
+    ~Solver () {}
     
     bool slotIsEmpty(int & row, int & col) const
     { return (grid[row][col] == EMPTY); }
@@ -37,12 +41,12 @@ public:
     Grid & getGrid()
     { return grid; }
     
-    int getCycles() const { return cycles; }
+    int getCycles() const { return cycles; } // Return the number of backtracking cycles
     
 private:
-    Grid grid;
-    int cycles;
-    static const int EMPTY = 0;
+    Grid grid; // Sudoku Grid object holding the numbers
+    int cycles; // Number of backtracking cycles
+    static const int EMPTY = 0; // variable to indicate an empty cell in the grid
 };
 
 #endif /* sudokuSolver_hpp */

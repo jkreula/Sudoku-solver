@@ -27,7 +27,7 @@ std::ostream & operator<<(std::ostream & out, Grid & grid)
             else
                 out << row[col] << " ";
         }
-        out << std::endl;
+        out << endl;
     });
     return out;
 }
@@ -41,6 +41,11 @@ int main(int argc, char* argv[])
     char ans;
     cout << "Give non-empty Sudoku grid cells on command line? (y/n)" << endl;
     cin >> ans;
+    while (std::tolower(ans) != 'y' && std::tolower(ans) != 'n')
+    {
+        cout << "Type 'y' for yes or 'n' for no." << endl;
+        cin >> ans;
+    }
 
     if( std::tolower(ans) == 'y' )
     {
@@ -51,22 +56,26 @@ int main(int argc, char* argv[])
         {
             cout << "Row number (1,...,9, or type -1 if done):\n";
             cin >> row;
+            
             if (row == -1)
-            {
                 break;
-            }
+
             cout << "Column number (1,..,9):\n";
             cin >> col;
             
             cout << "Cell value (1,..,9):\n";
             cin >> value;
             
+            /*
+             We are asking the user row and col numbers between 1 and 9 (easier to picture this way), but the actual indices are between 0 and 8, so we need to take 1 out of the row and col given by the user.
+            */
             grid[--row][--col] = value;
         }
     }
     else
     {
         // Alternatively give full grid here. 0 means empty cell.
+        // This is an example grid.
         grid = {{0, 0, 3, 0, 1, 0, 0, 0, 6},
                 {9, 0, 0, 0, 0, 0, 0, 5, 0},
                 {1, 5, 0, 0, 0, 9, 0, 0, 8},
@@ -80,8 +89,8 @@ int main(int argc, char* argv[])
     cout << "\nInput:" << endl;
     cout << grid << endl;
     
+    // Solver object corresponding to given grid.
     Solver solver(grid);
-    
     
     if (solver.solveBacktracking() == true)
     {
