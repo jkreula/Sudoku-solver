@@ -12,7 +12,8 @@
 bool Solver::findEmptySlotInGrid(int & row, int & col) const
 {
     /*
-     This function finds if there is an empty slot in the Sudoku grid. The arguments row and col are references and will be modified to the location of the empty slot if one is found.
+     This function finds if there is an empty slot in the Sudoku grid.
+     The arguments row and col are references and will be modified to the location of the empty slot if one is found.
      */
     for (row = 0; row < grid.getRows(); ++row)
     {
@@ -57,7 +58,8 @@ bool Solver::numberFoundInRegion(int & regionBeginRow, int & regionBeginCol, int
      This function checks whether a trial number is allowed to be put in a given region.
      */
     
-    // The size of a smaller 'region' is given by the square root of the number of rows in the grid. E.g., 9x9 grid consists of 9 regions of size 3x3.
+    // The size of a smaller 'region' is given by the square root of the number of rows in the grid.
+    // E.g., 9x9 grid consists of 9 regions of size 3x3.
     int regionSize = static_cast<int>(sqrt(grid.getRows()));     for (int row = 0; row < regionSize; ++row)
     {
         for (int col = 0; col < regionSize; ++col)
@@ -85,10 +87,17 @@ bool Solver::legalAssignmentToSlot(int & row, int & col, int & number) const
 bool Solver::solveBacktracking()
 {
     /*
-     This function does the heavy lifting in trying to find a solution to the Sudoku. Basically it tries to solve the puzzle recursively by trying to put a number to an empty slot and then see if it leads to a solution. If not, it backtracks its steps and tries with a different number.
+     This function does the heavy lifting in trying to find a solution to the Sudoku.
+     Basically it tries to solve the puzzle recursively by trying to put a number to an empty slot and then see if it leads to a solution.
+     If not, it backtracks its steps and tries with a different number.
      */
-    ++cycles; // Increase the number of 'cycles' i.e. backtrack calls.
-    int row, col; // row and col variables will be references and modified by findEmptySlotInGrid, which looks for the values of row and col in which there is an empty cell
+    // Increase the number of 'cycles' i.e. backtrack calls.
+    ++cycles;
+    /*
+     row and col variables will be references and modified by findEmptySlotInGrid,
+     which looks for the values of row and col in which there is an empty cell
+     */
+    int row, col;
     
     if (findEmptySlotInGrid(row,col) == false) // Modifies the values of row and col
         return true; // No empty slots in grid
