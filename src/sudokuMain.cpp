@@ -67,7 +67,8 @@ int main(int argc, char* argv[])
             cin >> value;
             
             /*
-             We are asking the user row and col numbers between 1 and 9 (easier to picture this way), but the actual indices are between 0 and 8, so we need to take 1 out of the row and col given by the user.
+             We are asking the user row and col numbers between 1 and 9 (easier to picture this way),
+             but the actual indices are between 0 and 8, so we need to take 1 out of the row and col given by the user.
             */
             grid[--row][--col] = value;
         }
