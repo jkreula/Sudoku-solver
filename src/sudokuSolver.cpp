@@ -60,7 +60,9 @@ bool Solver::numberFoundInRegion(int & regionBeginRow, int & regionBeginCol, int
     
     // The size of a smaller 'region' is given by the square root of the number of rows in the grid.
     // E.g., 9x9 grid consists of 9 regions of size 3x3.
-    int regionSize = static_cast<int>(sqrt(grid.getRows()));     for (int row = 0; row < regionSize; ++row)
+    int regionSize = static_cast<int>(sqrt(grid.getRows()));
+    
+    for (int row = 0; row < regionSize; ++row)
     {
         for (int col = 0; col < regionSize; ++col)
         {
@@ -79,9 +81,9 @@ bool Solver::legalAssignmentToSlot(int & row, int & col, int & number) const
     int regionBeginRow = row - (row % regionSize);
     int regionBeginCol = col - (col % regionSize);
     return slotIsEmpty(row,col) &&
-    (not numberFoundInRow(row,number)) &&
-    (not numberFoundInColumn(col,number)) &&
-    (not numberFoundInRegion(regionBeginRow,regionBeginCol,number));
+    ( not numberFoundInRow(row,number) ) &&
+    ( not numberFoundInColumn(col,number) ) &&
+    ( not numberFoundInRegion(regionBeginRow,regionBeginCol,number) );
 }
 
 bool Solver::solveBacktracking()
@@ -109,7 +111,7 @@ bool Solver::solveBacktracking()
             grid[row][col] = number; // Try if assignment of a particular number here leads to a solution
             
             // Call solve recursively
-            if (solveBacktracking() == true ) // Assignment worked.
+            if ( solveBacktracking() == true ) // Assignment worked.
                 return true; // Solution was found
             
             grid[row][col] = EMPTY; // Assignment didn't work, put slot back to empty.
