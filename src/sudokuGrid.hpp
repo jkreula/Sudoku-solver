@@ -12,9 +12,7 @@
 
 class Grid
 {
-public:
-    Grid() = default;
-    
+public:    
     // Constructor
     explicit Grid(int nRows) :
     rows(nRows),
